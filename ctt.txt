@@ -1,0 +1,27 @@
+
+SELECT 
+  users.*, 
+  books.*  
+FROM users  
+LEFT JOIN book_authors ON users.id = book_authors.user_id  
+JOIN books ON book_authors.book_id = books.id  
+WHERE users.id = 1;
+
+
+SELECT
+  DISTINCT
+  users.id AS user_id,
+  users.username,
+  users.email,
+  books.id AS book_id,
+  books.title,
+  books.description,
+  books.year,
+    book_borrows.created_at AS book_borrowed_at,
+  book_borrows.updated_at AS book_borrowed_updated_at,
+  book_borrows.due
+FROM users
+INNER JOIN book_authors ON users.id = book_authors.user_id
+INNER JOIN books ON book_authors.book_id = books.id
+INNER JOIN book_borrows ON books.id = book_borrows.book_id
+WHERE users.id = 1;
